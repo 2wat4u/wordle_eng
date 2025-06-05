@@ -1,0 +1,332 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    /* Fond foncé */
+    color: #fff;
+    /* Texte blanc pour le contraste */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    /* Hauteur de l'écran */
+}
+
+/* En-tête */
+header h1 {
+    margin: 20px 0;
+}
+
+/* Grille de jeu */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 70px);
+    /* 5 colonnes */
+    grid-template-rows: repeat(6, 70px);
+    /* 6 lignes */
+    gap: 10px;
+    /* Espacement entre les cellules */
+    justify-content: center;
+    margin: 20px;
+}
+
+.cell {
+    width: 70px;
+    height: 70px;
+    border: 3px solid #5A5A58;
+    /* Bordure gris foncé */
+
+    /* Fond sombre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    /* Texte blanc */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Animations */
+
+/* Animation d'agrandissement */
+@keyframes letter-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cell.animate {
+    animation: letter-pop 0.1s;
+}
+
+/* Animation de rotation verticale */
+@keyframes flip {
+    0% {
+        transform: rotateX(0);
+        background-color: transparent;
+        color: inherit;
+        /* Texte visible au départ */
+
+        /* La bordure reste visible */
+    }
+
+    50% {
+        transform: rotateX(90deg);
+        background-color: transparent;
+        /* Pas de fond visible */
+        color: transparent;
+        /* Texte disparaît */
+
+        /* La bordure reste visible */
+    }
+
+    100% {
+        transform: rotateX(0);
+        /* À 100%, le fond, la bordure et le texte sont définis dynamiquement par le JavaScript */
+    }
+}
+
+@keyframes win-flip {
+    0% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-20px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* Animation de vibration synchronisée */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+/* Classe pour appliquer l'animation */
+.shake {
+    animation: shake 0.5s ease;
+}
+
+
+/* Classe pour appliquer l'effet */
+.shake {
+    animation: shake 0.5s ease;
+}
+
+
+
+
+.cell.win-flip {
+    animation: win-flip 0.5s ease forwards;
+}
+
+
+
+.cell.flip {
+    animation: flip 0.6s ease forwards;
+    /* 600ms pour l'effet complet */
+}
+
+/* Couleurs des états */
+.cell.correct {
+    background-color: #597461;
+    /* Vert élégant */
+    border-color: #597461;
+    color: white;
+}
+
+.cell.present {
+    background-color: #CFA85B;
+    /* Doré */
+    border-color: #CFA85B;
+    color: white;
+}
+
+.cell.absent {
+    background-color: #2E3740;
+    /* Gris foncé */
+    border-color: #2E3740;
+    color: white;
+}
+
+/* Section des messages */
+#messages {
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+/* Style pour le clavier */
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+
+.key {
+    background-color: #5A5A58;
+    width: 2em;
+    height: 3em;
+    /* Fond sombre pour les touches */
+    border: 2px solid #5A5A58;
+    /* Bordure gris foncé */
+    color: #fff;
+    /* Texte blanc */
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.key:hover {
+    background-color: #485158;
+    border-color: #485158;
+}
+
+
+.key.correct {
+    background-color: #597461;
+    /* Vert élégant */
+    border-color: #597461;
+    color: white;
+}
+
+.key.present {
+    background-color: #CFA85B;
+    /* Doré */
+    border-color: #CFA85B;
+    color: white;
+}
+
+
+.key.absent {
+    background-color: #2E3740;
+    /* Gris foncé */
+    border-color: #2E3740;
+    color: white;
+}
+
+.key:active {
+    background-color: #666;
+    /* Plus clair lorsque pressé */
+}
+
+.key.backspace {
+    flex: 1.5;
+    width: 3.2em;
+    /* Plus large pour "Backspace" */
+    text-align: center;
+}
+
+.key.enter {
+    flex: 1.5;
+    width: 3.2em;
+    /* Plus large pour "Enter" */
+    text-align: center;
+}
+
+/* Style pour les messages temporaires */
+.temporary-message {
+    position: fixed;
+    top: 50%;
+    /* Position verticale */
+    left: 50%;
+    /* Position horizontale */
+    transform: translate(-30%, -50%);
+    /* Centrage précis */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Couleur de fond semi-transparente */
+    color: white;
+    /* Couleur du texte */
+    padding: 15px 25px;
+    /* Espacement interne */
+    border-radius: 12px;
+    /* Coins arrondis */
+    font-size: 1.5em;
+    /* Taille de la police augmentée */
+    text-align: center;
+    /* Alignement du texte */
+    z-index: 1000;
+    /* Toujours au-dessus des autres éléments */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    /* Légère ombre portée */
+    animation: fadeInOut 3s ease;
+    /* Animation de fondu */
+    max-width: 80%;
+    /* Empêche un message trop large */
+    word-wrap: break-word;
+    /* Permet de découper les mots longs */
+}
+
+/* Animation pour le fondu d'apparition et de disparition */
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    /* Réduit et invisible */
+    10%,
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Normal et visible */
+}
